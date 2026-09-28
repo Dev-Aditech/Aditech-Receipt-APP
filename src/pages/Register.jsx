@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
-import { Package } from 'lucide-react'
+import { KeyRound, Mail, MapPin, Phone, Store } from 'lucide-react'
 import { auth, db } from '../firebase'
 import { friendlyError } from '../utils/errors'
+import AuthShell, { AuthButton, AuthField, AuthMessage } from '../components/AuthShell'
 
 export default function Register() {
   // One piece of "state" holding everything the person types
@@ -46,48 +47,54 @@ export default function Register() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 py-8">
-      <form className="card w-full max-w-md space-y-4" onSubmit={handleSubmit}>
-        <div className="card-bar bg-linear-to-b from-purple-500 to-pink-500" />
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center rounded-2xl bg-linear-to-tr from-indigo-600 via-purple-600 to-pink-500 p-2.5 text-white shadow-lg shadow-indigo-500/20">
-            <Package className="h-6 w-6" />
-          </div>
-          <div>
-            <h1 className="text-lg font-black tracking-wide text-slate-900 dark:text-white">Register your business</h1>
-            <p className="muted text-xs">Set up once. Then you only type the items for each sale.</p>
-          </div>
+    <AuthShell
+      wide
+      title="Register Your Business"
+      subtitle="Set up once. Then you only type the items for each sale."
+      footer="Secure Terminal • Add your logo later under Settings"
+    >
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {error && <AuthMessage>{error}</AuthMessage>}
+
+        <AuthField
+          id="name" label="Business name" icon={Store} required
+          placeholder="e.g. ABC Mini Mart"
+          value={form.name} onChange={(e) => update('name', e.target.value)}
+        />
+
+        <div className="grid gap-5 sm:grid-cols-2">
+          <AuthField
+            id="address" label="Address" icon={MapPin}
+            placeholder="12 Main Street, Ibadan"
+            value={form.address} onChange={(e) => update('address', e.target.value)}
+          />
+          <AuthField
+            id="phone" label="Phone" icon={Phone} type="tel"
+            placeholder="0801 234 5678"
+            value={form.phone} onChange={(e) => update('phone', e.target.value)}
+          />
         </div>
 
-        <div>
-          <label className="label" htmlFor="name">Business name</label>
-          <input id="name" required className="input" placeholder="ABC Mini Mart" value={form.name} onChange={(e) => update('name', e.target.value)} />
-        </div>
-        <div>
-          <label className="label" htmlFor="address">Address</label>
-          <input id="address" className="input" placeholder="12 Main Street, Ibadan" value={form.address} onChange={(e) => update('address', e.target.value)} />
-        </div>
-        <div>
-          <label className="label" htmlFor="phone">Phone</label>
-          <input id="phone" type="tel" className="input font-mono" placeholder="0801 234 5678" value={form.phone} onChange={(e) => update('phone', e.target.value)} />
-        </div>
-        <div>
-          <label className="label" htmlFor="email">Email</label>
-          <input id="email" type="email" required autoComplete="email" className="input" value={form.email} onChange={(e) => update('email', e.target.value)} />
-        </div>
-        <div>
-          <label className="label" htmlFor="password">Password (at least 6 characters)</label>
-          <input id="password" type="password" required minLength={6} autoComplete="new-password" className="input" value={form.password} onChange={(e) => update('password', e.target.value)} />
-        </div>
+        <AuthField
+          id="email" label="Email" icon={Mail} type="email" required
+          autoComplete="email" placeholder="you@yourstore.com"
+          value={form.email} onChange={(e) => update('email', e.target.value)}
+        />
+        <AuthField
+          id="password" label="Password (at least 6 characters)" icon={KeyRound} type="password"
+          required minLength={6} autoComplete="new-password" placeholder="Choose a password"
+          value={form.password} onChange={(e) => update('password', e.target.value)}
+        />
 
-        {error && <p className="error-text" role="alert">{error}</p>}
-
-        <button className="btn-primary w-full uppercase tracking-wider" disabled={busy}>
-          {busy ? 'Creating account...' : 'Create account'}
-        </button>
-        <p className="muted text-xs">You can add your logo after you log in, under Settings.</p>
-        <p className="muted text-xs">Already registered? <Link to="/login" className="link">Log in</Link></p>
+        <AuthButton busy={busy} busyText="Creating account...">Create Account</AuthButton>
       </form>
-    </div>
+
+      <p className="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        Already registered?{' '}
+        <Link to="/login" className="font-semibold text-emerald-600 hover:underline dark:text-emerald-400">
+          Sign in
+        </Link>
+      </p>
+    </AuthShell>
   )
 }

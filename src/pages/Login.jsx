@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
-import { Package } from 'lucide-react'
+import { KeyRound, Mail } from 'lucide-react'
 import { auth } from '../firebase'
 import { friendlyError } from '../utils/errors'
+import AuthShell, { AuthButton, AuthField, AuthMessage } from '../components/AuthShell'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -19,6 +20,7 @@ export default function Login() {
     setBusy(true)
     try {
       await signInWithEmailAndPassword(auth, email.trim(), password)
+      // The router sends them to the app automatically.
     } catch (err) {
       setError(friendlyError(err))
       setBusy(false)
@@ -41,42 +43,40 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 py-8">
-      <form className="card w-full max-w-md space-y-4" onSubmit={handleSubmit}>
-        <div className="card-bar bg-linear-to-b from-indigo-500 to-purple-500" />
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center rounded-2xl bg-linear-to-tr from-indigo-600 via-purple-600 to-pink-500 p-2.5 text-white shadow-lg shadow-indigo-500/20">
-            <Package className="h-6 w-6" />
-          </div>
-          <div>
-            <h1 className="text-lg font-black tracking-wide text-slate-900 dark:text-white">Log in</h1>
-            <p className="muted text-xs">Point of Sale &amp; Thermal Terminal</p>
-          </div>
-        </div>
+    <AuthShell
+      title="Receipt Desk"
+      subtitle="Secure POS Terminal & Business Sign-in"
+      footer="Secure Terminal • Your data stays private to your business"
+    >
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {error && <AuthMessage>{error}</AuthMessage>}
+        {info && <AuthMessage type="success">{info}</AuthMessage>}
 
-        <div>
-          <label className="label" htmlFor="email">Email</label>
-          <input id="email" type="email" required autoComplete="email" className="input" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label className="label" htmlFor="password">Password</label>
-          <input id="password" type="password" required autoComplete="current-password" className="input" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
+        <AuthField
+          id="email" label="Email" icon={Mail} type="email" required
+          autoComplete="email" placeholder="you@yourstore.com"
+          value={email} onChange={(e) => setEmail(e.target.value)}
+        />
+        <AuthField
+          id="password" label="Password" icon={KeyRound} type="password" required
+          autoComplete="current-password" placeholder="Enter your password"
+          value={password} onChange={(e) => setPassword(e.target.value)}
+        />
 
-        {error && <p className="error-text" role="alert">{error}</p>}
-        {info && <p className="success-text" role="status">{info}</p>}
-
-        <button className="btn-primary w-full uppercase tracking-wider" disabled={busy}>
-          {busy ? 'Logging in...' : 'Log in'}
-        </button>
-
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <button type="button" className="link" onClick={handleReset}>Forgot password?</button>
-          <span className="muted text-xs">
-            New here? <Link to="/register" className="link">Register your business</Link>
-          </span>
-        </div>
+        <AuthButton busy={busy} busyText="Signing in...">Sign In to Terminal</AuthButton>
       </form>
-    </div>
+
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-2">
+        <button type="button" onClick={handleReset} className="text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400">
+          Forgot password?
+        </button>
+        <span className="text-xs text-slate-500 dark:text-slate-400">
+          New here?{' '}
+          <Link to="/register" className="font-semibold text-emerald-600 hover:underline dark:text-emerald-400">
+            Register your business
+          </Link>
+        </span>
+      </div>
+    </AuthShell>
   )
 }
