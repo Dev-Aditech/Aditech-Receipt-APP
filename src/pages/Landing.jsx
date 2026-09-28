@@ -295,8 +295,8 @@ export default function Landing() {
                 </div>
 
                 <div className="relative flex flex-col items-center justify-center overflow-hidden bg-slate-900 p-6 lg:col-span-5">
-                  <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-10 [background-size:16px_16px]" />
-                  <div className="relative w-full max-w-[260px] rounded-sm border-t-4 border-amber-600 bg-amber-50 p-5 font-mono text-[11px] text-slate-900 shadow-2xl">
+                  <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-10 bg-size-[16px_16px]" />
+                  <div className="relative w-full max-w-65 rounded-sm border-t-4 border-amber-600 bg-amber-50 p-5 font-mono text-[11px] text-slate-900 shadow-2xl">
                     <div className="border-b border-dashed border-slate-300 pb-3 text-center">
                       <div className="text-sm font-bold uppercase tracking-wide">Aditech Supermarket</div>
                       <div className="mt-0.5 text-[10px] text-slate-600">Ikeja, Lagos</div>
@@ -494,7 +494,7 @@ export default function Landing() {
           </Heading>
 
           <div className="rounded-2xl border border-slate-800 bg-slate-900 p-2 shadow-2xl sm:p-4">
-            <div className="grid min-h-[440px] grid-cols-1 overflow-hidden rounded-xl bg-slate-950 text-left text-slate-200 lg:grid-cols-12">
+            <div className="grid min-h-110 grid-cols-1 overflow-hidden rounded-xl bg-slate-950 text-left text-slate-200 lg:grid-cols-12">
               <div className="hidden flex-col justify-between border-r border-slate-800 bg-slate-900 p-6 lg:col-span-3 lg:flex">
                 <div>
                   <div className="mb-8 flex items-center gap-2">
@@ -633,7 +633,7 @@ export default function Landing() {
 
       {/* ---------- Final call to action ---------- */}
       <section className="relative overflow-hidden bg-indigo-600 py-24 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] opacity-10 [background-size:20px_20px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] opacity-10 bg-size-[20px_20px]" />
         <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="mb-6 text-3xl font-extrabold tracking-tight sm:text-5xl">Make every sale look professional.</h2>
           <p className="mx-auto mb-10 max-w-2xl text-lg text-indigo-100">

@@ -4,7 +4,7 @@
    (the sun/moon button does this). Then any "dark:" class below applies. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
+:root {
   --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Courier Prime", ui-monospace, "Courier New", monospace;
 }

@@ -59,11 +59,11 @@ export default function History() {
     <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
       <div className="space-y-6 lg:col-span-8 print:hidden">
         <div className="grid grid-cols-2 gap-4">
-          <div className="card !p-5">
+          <div className="card p-5!">
             <p className="label">Today&apos;s sales</p>
             <p className="font-mono text-2xl font-black text-indigo-600 dark:text-indigo-400">{formatMoney(todayTotal)}</p>
           </div>
-          <div className="card !p-5">
+          <div className="card p-5!">
             <p className="label">Receipts today</p>
             <p className="font-mono text-2xl font-black text-slate-900 dark:text-white">{todaySales.length}</p>
           </div>
@@ -80,7 +80,7 @@ export default function History() {
             <div className="relative w-full sm:w-64">
               <Search className="absolute left-3.5 top-3 h-4 w-4 text-slate-400" />
               <input
-                type="text" className="input !py-2.5 pl-10 text-xs"
+                type="text" className="input py-2.5! pl-10 text-xs"
                 placeholder="Search receipt # or method..."
                 value={search} onChange={(e) => setSearch(e.target.value)}
               />
@@ -135,7 +135,7 @@ export default function History() {
                     <td className="px-4 py-4 text-center">
                       <button
                         type="button"
-                        className="btn-secondary !gap-1.5 !px-3 !py-1.5"
+                        className="btn-secondary gap-1.5! px-3! py-1.5!"
                         onClick={(e) => {
                           e.stopPropagation() // do not also trigger the row click
                           reprint(s)

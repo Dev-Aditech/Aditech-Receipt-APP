@@ -125,7 +125,7 @@ export default function NewSale() {
             <div className="card">
               <div className="card-bar bg-linear-to-b from-indigo-500 to-purple-500" />
               <div className="mb-4 flex items-center justify-between">
-                <h2 className="card-title !mb-0">
+                <h2 className="card-title mb-0!">
                   <Sparkles className="h-4 w-4 text-indigo-500" /> Item Entry
                 </h2>
                 <span className="rounded-xl border border-slate-200 bg-slate-100 px-3 py-1 font-mono text-xs text-indigo-600 dark:border-slate-800 dark:bg-slate-950 dark:text-indigo-400">
@@ -208,7 +208,7 @@ export default function NewSale() {
 
             <div className="card">
               <div className="card-bar bg-linear-to-b from-purple-500 to-pink-500" />
-              <h3 className="card-title !mb-3">
+              <h3 className="card-title mb-3!">
                 <CreditCard className="h-4 w-4 text-purple-500" /> Payment Type
               </h3>
 

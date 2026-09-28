@@ -36,7 +36,7 @@ export default function Receipt({ business, sale }) {
             {initials}
           </div>
         )}
-        <h2 className="break-words text-sm font-black uppercase tracking-widest">{business.name}</h2>
+        <h2 className="wrap-break-word text-sm font-black uppercase tracking-widest">{business.name}</h2>
         {business.address && <p className="text-slate-600">{business.address}</p>}
         {business.phone && <p className="text-slate-600">Tel: {business.phone}</p>}
       </div>
@@ -53,11 +53,11 @@ export default function Receipt({ business, sale }) {
 
       <div className="my-2.5 border-b border-dashed border-slate-400" />
 
-      <div className="my-2 min-h-[60px] space-y-2">
+      <div className="my-2 min-h-15 space-y-2">
         {items.length === 0 && <p className="py-6 text-center italic text-slate-400">No items in cart</p>}
         {items.map((item, index) => (
           <div key={index}>
-            <p className="break-words font-bold leading-tight text-slate-900">{(item.name || '').trim() || 'Item'}</p>
+            <p className="wrap-break-word font-bold leading-tight text-slate-900">{(item.name || '').trim() || 'Item'}</p>
             <div className="flex justify-between gap-2 text-slate-700">
               <span>{parseFloat(item.qty) || 0} x {formatMoney(parseFloat(item.price) || 0)}</span>
               <span className="font-bold text-slate-900">{formatMoney(lineTotal(item))}</span>
@@ -94,7 +94,7 @@ export default function Receipt({ business, sale }) {
       {business.footer && (
         <>
           <div className="my-3 border-b border-dashed border-slate-400" />
-          <p className="break-words text-center font-bold text-slate-700">{business.footer}</p>
+          <p className="wrap-break-word text-center font-bold text-slate-700">{business.footer}</p>
         </>
       )}
     </div>
