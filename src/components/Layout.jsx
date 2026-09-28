@@ -44,9 +44,9 @@ export default function Layout() {
         </div>
 
         <nav className="flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-100 p-1.5 shadow-sm dark:border-slate-800 dark:bg-slate-950/80">
-          <NavLink to="/" end className={tabClass}><ShoppingCart className="h-4 w-4" /> New Sale</NavLink>
-          <NavLink to="/history" className={tabClass}><History className="h-4 w-4" /> History</NavLink>
-          <NavLink to="/settings" className={tabClass}><Settings className="h-4 w-4" /> Settings</NavLink>
+          <NavLink to="/app" end className={tabClass}><ShoppingCart className="h-4 w-4" /> New Sale</NavLink>
+          <NavLink to="/app/history" className={tabClass}><History className="h-4 w-4" /> History</NavLink>
+          <NavLink to="/app/settings" className={tabClass}><Settings className="h-4 w-4" /> Settings</NavLink>
         </nav>
 
         <div className="flex items-center gap-3">

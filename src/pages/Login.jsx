@@ -44,7 +44,7 @@ export default function Login() {
 
   return (
     <AuthShell
-      title="Receipt Desk"
+      title="Aditech Receipt"
       subtitle="Secure POS Terminal & Business Sign-in"
       footer="Secure Terminal • Your data stays private to your business"
     >
