@@ -1,33 +1,34 @@
 // The look shared by the Login and Register pages: soft glowing background,
 // a centred card, a light/dark switch, and a few small building blocks.
+// Colours match the public landing page (indigo / purple / pink).
 import { Link } from 'react-router-dom'
-import { ArrowLeft, ChevronRight, Moon, ShieldCheck, Store, Sun } from 'lucide-react'
+import { ArrowLeft, ChevronRight, Moon, Printer, ShieldCheck, Sun } from 'lucide-react'
 import { useTheme } from '../utils/theme'
 
 export default function AuthShell({ title, subtitle, footer, wide = false, children }) {
   const [theme, toggleTheme] = useTheme()
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-br from-slate-100 via-emerald-50 to-teal-100 p-4 transition-colors duration-300 dark:bg-slate-950 dark:bg-none">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-br from-slate-100 via-indigo-50 to-purple-100 p-4 transition-colors duration-300 dark:bg-slate-950 dark:bg-none">
       {/* Soft glowing circles in the background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-teal-500/10 blur-3xl" />
+        <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl" />
       </div>
+
+      <Link
+        to="/"
+        className="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/90 px-3 py-2.5 text-xs font-semibold text-slate-700 shadow-sm backdrop-blur transition-all hover:bg-slate-100 sm:left-6 sm:top-6 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-200 dark:hover:bg-slate-700"
+      >
+        <ArrowLeft className="h-3.5 w-3.5" /> Home
+      </Link>
 
       <div
         className={
-          'relative my-6 w-full rounded-3xl border border-slate-200/80 bg-white/95 p-8 shadow-2xl shadow-slate-300/60 backdrop-blur-xl transition-all duration-300 dark:border-slate-800 dark:bg-slate-900/90 dark:shadow-emerald-950/40 ' +
+          'relative my-6 w-full rounded-3xl border border-slate-200/80 bg-white/95 p-8 shadow-2xl shadow-slate-300/60 backdrop-blur-xl transition-all duration-300 dark:border-slate-800 dark:bg-slate-900/90 dark:shadow-indigo-950/40 ' +
           (wide ? 'max-w-lg' : 'max-w-md')
         }
       >
-        <Link
-          to="/"
-          className="absolute left-6 top-6 flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-100 px-3 py-2.5 text-xs font-semibold text-slate-700 transition-all hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" /> Home
-        </Link>
-
         <button
           type="button"
           onClick={toggleTheme}
@@ -38,8 +39,8 @@ export default function AuthShell({ title, subtitle, footer, wide = false, child
         </button>
 
         <div className="mb-8 pt-2 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-tr from-emerald-600 to-teal-500 text-white shadow-xl shadow-emerald-600/30 transition-transform hover:scale-105">
-            <Store className="h-8 w-8" />
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-tr from-indigo-600 via-purple-600 to-pink-500 text-white shadow-xl shadow-indigo-600/30 transition-transform hover:scale-105">
+            <Printer className="h-8 w-8" />
           </div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">{title}</h1>
           <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">{subtitle}</p>
@@ -50,7 +51,7 @@ export default function AuthShell({ title, subtitle, footer, wide = false, child
         {footer && (
           <div className="mt-8 border-t border-slate-100 pt-6 text-center text-xs text-slate-400 dark:border-slate-800 dark:text-slate-500">
             <p className="flex items-center justify-center gap-1.5">
-              <ShieldCheck className="h-4 w-4 text-emerald-500" /> {footer}
+              <ShieldCheck className="h-4 w-4 text-indigo-500" /> {footer}
             </p>
           </div>
         )}
@@ -74,20 +75,20 @@ export function AuthField({ label, icon: Icon, id, ...inputProps }) {
         <input
           id={id}
           {...inputProps}
-          className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm font-medium text-slate-900 placeholder-slate-400 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder-slate-600"
+          className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm font-medium text-slate-900 placeholder-slate-400 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder-slate-600"
         />
       </div>
     </div>
   )
 }
 
-// The big green submit button
+// The big indigo submit button, matching the landing page's call-to-action buttons
 export function AuthButton({ busy, busyText, children }) {
   return (
     <button
       type="submit"
       disabled={busy}
-      className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-emerald-600 to-teal-600 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-emerald-600/30 transition-all hover:from-emerald-500 hover:to-teal-500 active:scale-[0.99] disabled:cursor-wait disabled:opacity-70"
+      className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-indigo-600/30 transition-all hover:from-indigo-500 hover:to-purple-500 active:scale-[0.99] disabled:cursor-wait disabled:opacity-70"
     >
       <span>{busy ? busyText : children}</span>
       {!busy && <ChevronRight className="h-4 w-4" />}

@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import NewSale from './pages/NewSale'
 import History from './pages/History'
 import Settings from './pages/Settings'
+import Templates from './pages/Templates'
 
 function Loading({ text }) {
   return <p className="mt-[30vh] text-center text-sm text-slate-500">{text}</p>
@@ -50,6 +51,7 @@ export default function App() {
       <Route path="/app" element={<RequireLogin><Layout /></RequireLogin>}>
         <Route index element={<NewSale />} />
         <Route path="history" element={<History />} />
+        <Route path="templates" element={<Templates />} />
         <Route path="settings" element={<Settings />} />
       </Route>
 

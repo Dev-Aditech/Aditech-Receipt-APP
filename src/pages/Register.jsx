@@ -36,6 +36,7 @@ export default function Register() {
         footer: 'Thank you for your patronage!',
         logo: '',
         paper: '80',
+        template: 'classic',
         receiptCount: 0,
         createdAt: serverTimestamp(),
       })
@@ -91,7 +92,7 @@ export default function Register() {
 
       <p className="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
         Already registered?{' '}
-        <Link to="/login" className="font-semibold text-emerald-600 hover:underline dark:text-emerald-400">
+        <Link to="/login" className="font-semibold text-indigo-600 hover:underline dark:text-indigo-400">
           Sign in
         </Link>
       </p>

@@ -67,12 +67,12 @@ export default function Login() {
       </form>
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-2">
-        <button type="button" onClick={handleReset} className="text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400">
+        <button type="button" onClick={handleReset} className="text-xs font-semibold text-indigo-600 hover:underline dark:text-indigo-400">
           Forgot password?
         </button>
         <span className="text-xs text-slate-500 dark:text-slate-400">
           New here?{' '}
-          <Link to="/register" className="font-semibold text-emerald-600 hover:underline dark:text-emerald-400">
+          <Link to="/register" className="font-semibold text-indigo-600 hover:underline dark:text-indigo-400">
             Register your business
           </Link>
         </span>

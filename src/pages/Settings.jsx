@@ -16,6 +16,7 @@ export default function Settings() {
     phone: business.phone || '',
     footer: business.footer || '',
     paper: business.paper || '80',
+    template: business.template || 'classic',
     logo: business.logo || '',
   })
   const [message, setMessage] = useState('')
@@ -83,7 +84,7 @@ export default function Settings() {
         <div>
           <label className="label" htmlFor="logo">Logo</label>
           {form.logo && (
-            <img src={form.logo} alt="Your logo" className="mb-3 max-h-24 max-w-40 rounded-xl border border-slate-200 bg-white object-contain p-1 dark:border-slate-700" />
+            <img src={form.logo} alt="Your logo" className="mb-3 max-h-24 max-w-[160px] rounded-xl border border-slate-200 bg-white object-contain p-1 dark:border-slate-700" />
           )}
           <input
             id="logo" type="file" accept="image/*" onChange={handleLogo}
