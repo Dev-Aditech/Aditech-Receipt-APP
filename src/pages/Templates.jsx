@@ -48,7 +48,7 @@ export default function Templates() {
             <div
               key={id}
               className={
-                'card !p-4 transition-all ' +
+                'card p-4! transition-all ' +
                 (isSelected ? 'ring-2 ring-violet-500 ring-offset-2 ring-offset-slate-50 dark:ring-offset-slate-950' : '')
               }
             >
@@ -73,7 +73,7 @@ export default function Templates() {
                 type="button"
                 onClick={() => { setSelected(id); setMessage('') }}
                 disabled={isSelected}
-                className={isSelected ? 'btn-secondary w-full !cursor-default opacity-70' : 'btn-primary w-full'}
+                className={isSelected ? 'btn-secondary w-full cursor-default! opacity-70' : 'btn-primary w-full'}
               >
                 {isSelected ? 'Currently selected' : 'Choose this template'}
               </button>

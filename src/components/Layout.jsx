@@ -154,7 +154,7 @@ export default function Layout() {
 
       {/* Logout confirmation, so a stray tap can't sign someone out mid-sale */}
       {logoutOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm print:hidden" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm print:hidden" role="dialog" aria-modal="true">
           <div className="card w-full max-w-sm space-y-4 text-center">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-rose-50 text-rose-600 dark:bg-rose-500/10 dark:text-rose-400">
               <AlertTriangle className="h-6 w-6" />
