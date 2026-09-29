@@ -4,7 +4,7 @@
    (the sun/moon button does this). Then any "dark:" class below applies. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
+@theme {
   --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Courier Prime", ui-monospace, "Courier New", monospace;
 }
@@ -34,7 +34,7 @@
     @apply mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400;
   }
   .input {
-    @apply w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-60 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder-slate-600;
+    @apply w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-all focus:outline-none focus:ring-2 focus:ring-violet-500 disabled:opacity-60 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder-slate-600;
   }
   .muted {
     @apply text-slate-500 dark:text-slate-400;
@@ -43,7 +43,7 @@
     @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-xs font-bold transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-xs font-bold transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 bg-linear-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-600/30 hover:opacity-95;
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-xs font-bold transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 bg-violet-600 text-white shadow-lg shadow-violet-600/25 hover:bg-violet-500;
   }
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-xs font-bold transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 border border-slate-200 bg-slate-100 text-slate-800 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700;
@@ -58,7 +58,7 @@
     @apply flex flex-1 items-center justify-center gap-1.5 rounded-xl py-3 text-xs font-bold text-slate-600 transition-all hover:text-slate-900 disabled:cursor-not-allowed dark:text-slate-400 dark:hover:text-white;
   }
   .seg-btn[aria-pressed="true"] {
-    @apply bg-linear-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-600/30 hover:text-white;
+    @apply bg-violet-600 text-white shadow-lg shadow-violet-600/25 hover:text-white;
   }
   .error-text {
     @apply text-sm font-semibold text-rose-500;
@@ -67,7 +67,10 @@
     @apply text-sm font-semibold text-emerald-500;
   }
   .link {
-    @apply text-xs font-semibold text-indigo-500 underline underline-offset-2 hover:text-indigo-400;
+    @apply text-xs font-semibold text-violet-500 underline underline-offset-2 hover:text-violet-400;
+  }
+  .card-topbar {
+    @apply absolute inset-x-0 top-0 h-1 bg-linear-to-r from-violet-500 to-indigo-500;
   }
 }
 

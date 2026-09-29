@@ -59,11 +59,11 @@ export default function History() {
     <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
       <div className="space-y-6 lg:col-span-8 print:hidden">
         <div className="grid grid-cols-2 gap-4">
-          <div className="card p-5!">
+          <div className="card !p-5">
             <p className="label">Today&apos;s sales</p>
-            <p className="font-mono text-2xl font-black text-indigo-600 dark:text-indigo-400">{formatMoney(todayTotal)}</p>
+            <p className="font-mono text-2xl font-black text-violet-600 dark:text-violet-400">{formatMoney(todayTotal)}</p>
           </div>
-          <div className="card p-5!">
+          <div className="card !p-5">
             <p className="label">Receipts today</p>
             <p className="font-mono text-2xl font-black text-slate-900 dark:text-white">{todaySales.length}</p>
           </div>
@@ -73,14 +73,14 @@ export default function History() {
           <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
             <div>
               <h2 className="flex items-center gap-2 text-base font-bold text-slate-900 dark:text-white">
-                <HistoryIcon className="h-5 w-5 text-indigo-500" /> Transaction History
+                <HistoryIcon className="h-5 w-5 text-violet-600" /> Transaction History
               </h2>
               <p className="muted text-xs">View past sales and reprint receipts</p>
             </div>
             <div className="relative w-full sm:w-64">
               <Search className="absolute left-3.5 top-3 h-4 w-4 text-slate-400" />
               <input
-                type="text" className="input py-2.5! pl-10 text-xs"
+                type="text" className="input !py-2.5 pl-10 text-xs"
                 placeholder="Search receipt # or method..."
                 value={search} onChange={(e) => setSearch(e.target.value)}
               />
@@ -116,7 +116,7 @@ export default function History() {
                     onClick={() => setSelectedId(s.id)}
                     className={'cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-slate-950/50 ' + (s.id === selectedId ? 'bg-slate-50 dark:bg-slate-950/50' : '')}
                   >
-                    <td className="px-4 py-4 font-mono font-bold text-indigo-500 dark:text-indigo-400">#{padNumber(s.number)}</td>
+                    <td className="px-4 py-4 font-mono font-bold text-violet-600 dark:text-violet-400">#{padNumber(s.number)}</td>
                     <td className="whitespace-nowrap px-4 py-4 text-slate-700 dark:text-slate-300">
                       <span className="inline-flex items-center gap-1.5">
                         <Clock className="h-3.5 w-3.5 text-slate-400" />
@@ -135,13 +135,13 @@ export default function History() {
                     <td className="px-4 py-4 text-center">
                       <button
                         type="button"
-                        className="btn-secondary gap-1.5! px-3! py-1.5!"
+                        className="btn-secondary !gap-1.5 !px-3 !py-1.5"
                         onClick={(e) => {
                           e.stopPropagation() // do not also trigger the row click
                           reprint(s)
                         }}
                       >
-                        <Printer className="h-3.5 w-3.5 text-indigo-500" /> Reprint
+                        <Printer className="h-3.5 w-3.5 text-violet-600" /> Reprint
                       </button>
                     </td>
                   </tr>

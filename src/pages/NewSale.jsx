@@ -63,6 +63,14 @@ export default function NewSale() {
     setItems((old) => old.filter((item) => item.id !== id))
   }
 
+  // Empties the cart without completing a sale. The receipt number is untouched.
+  function clearSale() {
+    if (items.length === 0) return
+    setItems([])
+    setReceived('')
+    showToast('Sale cleared')
+  }
+
   function completeSale() {
     if (items.length === 0) return
 
@@ -112,84 +120,81 @@ export default function NewSale() {
   return (
     <>
       {toast && (
-        <div className="fixed right-4 top-20 z-50 flex items-center gap-2 rounded-xl bg-rose-500 px-4 py-2.5 text-xs font-bold text-white shadow-2xl print:hidden" role="alert">
-          <span>⚠️</span> {toast}
+        <div className="fixed right-4 top-20 z-50 flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-xs font-medium text-white shadow-2xl print:hidden" role="alert">
+          <CheckCircle className="h-4 w-4 text-emerald-400" /> {toast}
         </div>
       )}
 
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
-        {/* LEFT: item entry, payment, complete button */}
+        {/* LEFT: item entry and payment */}
         <div className="space-y-6 lg:col-span-7 print:hidden">
           {/* A disabled fieldset locks every box and button inside it after the sale is saved */}
           <fieldset disabled={saved} className="m-0 min-w-0 space-y-6 border-0 p-0">
             <div className="card">
-              <div className="card-bar bg-linear-to-b from-indigo-500 to-purple-500" />
-              <div className="mb-4 flex items-center justify-between">
-                <h2 className="card-title mb-0!">
-                  <Sparkles className="h-4 w-4 text-indigo-500" /> Item Entry
+              <div className="card-topbar" />
+              <div className="mb-5 flex items-center justify-between">
+                <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-slate-800 dark:text-slate-200">
+                  <Sparkles className="h-4 w-4 text-violet-600" /> Item Entry
                 </h2>
-                <span className="rounded-xl border border-slate-200 bg-slate-100 px-3 py-1 font-mono text-xs text-indigo-600 dark:border-slate-800 dark:bg-slate-950 dark:text-indigo-400">
+                <span className="rounded-full border border-violet-100 bg-violet-50 px-3 py-1 text-xs font-semibold text-violet-700 dark:border-slate-800 dark:bg-slate-950 dark:text-violet-400">
                   Receipt #{padNumber(number)}
                 </span>
               </div>
 
-              <form onSubmit={handleAddItem} className="space-y-4">
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-12">
-                  <div className="sm:col-span-6">
-                    <label className="label" htmlFor="itemName">Item Name</label>
+              <form onSubmit={handleAddItem} className="grid grid-cols-1 items-end gap-4 sm:grid-cols-12">
+                <div className="sm:col-span-6">
+                  <label className="label" htmlFor="itemName">Item Name</label>
+                  <input
+                    id="itemName" ref={nameInput} type="text" autoComplete="off"
+                    className="input" placeholder="e.g. USB-C Cable"
+                    value={itemName} onChange={(e) => setItemName(e.target.value)}
+                  />
+                </div>
+                <div className="sm:col-span-3">
+                  <label className="label" htmlFor="itemPrice">Price (₦)</label>
+                  <div className="relative">
+                    <span className="absolute left-3.5 top-3 font-medium text-slate-400">₦</span>
                     <input
-                      id="itemName" ref={nameInput} type="text" autoComplete="off"
-                      className="input" placeholder="e.g. USB-C Cable"
-                      value={itemName} onChange={(e) => setItemName(e.target.value)}
-                    />
-                  </div>
-                  <div className="sm:col-span-4">
-                    <label className="label" htmlFor="itemPrice">Price (₦)</label>
-                    <div className="relative">
-                      <span className="absolute left-3.5 top-3 font-bold text-slate-400">₦</span>
-                      <input
-                        id="itemPrice" type="number" inputMode="decimal" min="0" step="any"
-                        className="input pl-8 font-mono" placeholder="0"
-                        value={itemPrice} onChange={(e) => setItemPrice(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="label" htmlFor="itemQty">Qty</label>
-                    <input
-                      id="itemQty" type="number" inputMode="decimal" min="1" step="any"
-                      className="input px-3 text-center font-mono"
-                      value={itemQty} onChange={(e) => setItemQty(e.target.value)}
+                      id="itemPrice" type="number" inputMode="decimal" min="0" step="any"
+                      className="input pl-8 font-mono" placeholder="0"
+                      value={itemPrice} onChange={(e) => setItemPrice(e.target.value)}
                     />
                   </div>
                 </div>
-
-                <button type="submit" className="btn bg-slate-800 text-white shadow-md hover:bg-slate-700 dark:border dark:border-slate-700">
-                  <Plus className="h-4 w-4 text-indigo-400" /> Add to Sale
-                </button>
+                <div className="sm:col-span-3">
+                  <label className="label" htmlFor="itemQty">Qty</label>
+                  <input
+                    id="itemQty" type="number" inputMode="decimal" min="1" step="any"
+                    className="input px-3 text-center font-mono"
+                    value={itemQty} onChange={(e) => setItemQty(e.target.value)}
+                  />
+                </div>
+                <div className="pt-2 sm:col-span-12">
+                  <button type="submit" className="btn w-full bg-slate-900 text-white shadow-md hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600 sm:w-auto">
+                    <Plus className="h-4 w-4" /> Add to Sale
+                  </button>
+                </div>
               </form>
 
-              <div className="mt-6 border-t border-slate-100 pt-4 dark:border-slate-800">
-                <div className="max-h-56 space-y-2.5 overflow-y-auto pr-1">
+              <div className="mt-6 border-t border-slate-100 pt-6 dark:border-slate-800">
+                <div className="mb-6 max-h-56 space-y-2.5 overflow-y-auto pr-1">
                   {items.length === 0 ? (
-                    <p className="py-8 text-center text-xs italic text-slate-400 dark:text-slate-600">
+                    <p className="py-4 text-center text-sm italic text-slate-400 dark:text-slate-600">
                       No items added yet. Fill in the details above.
                     </p>
                   ) : (
                     items.map((item) => (
-                      <div key={item.id} className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 p-3.5 transition-colors hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950/60 dark:hover:border-slate-700">
-                        <div className="flex-1 pr-3">
-                          <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200">{item.name}</h4>
-                          <p className="muted font-mono text-[11px]">{formatMoney(item.price)} × {item.qty}</p>
+                      <div key={item.id} className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-3 text-sm dark:border-slate-800 dark:bg-slate-950/60">
+                        <div>
+                          <span className="font-semibold text-slate-800 dark:text-slate-200">{item.name}</span>
+                          <div className="text-xs text-slate-500 dark:text-slate-400">{formatMoney(item.price)} × {item.qty}</div>
                         </div>
-                        <div className="flex items-center gap-4">
-                          <span className="font-mono text-sm font-black text-indigo-500 dark:text-indigo-400">
-                            {formatMoney(item.price * item.qty)}
-                          </span>
+                        <div className="flex items-center gap-3">
+                          <span className="font-bold text-slate-900 dark:text-white">{formatMoney(item.price * item.qty)}</span>
                           <button
                             type="button" title="Remove" aria-label={'Remove ' + item.name}
                             onClick={() => removeItem(item.id)}
-                            className="rounded-xl p-2 text-slate-400 transition-colors hover:bg-rose-50 hover:text-rose-600 dark:text-slate-500 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
+                            className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
@@ -199,32 +204,44 @@ export default function NewSale() {
                   )}
                 </div>
 
-                <div className="mt-4 flex items-center justify-between rounded-2xl border border-indigo-100 bg-indigo-50/50 px-5 py-4 dark:border-slate-800 dark:bg-slate-950">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-400">Total Due</span>
-                  <span className="font-mono text-2xl font-black text-indigo-600 dark:text-indigo-400">{formatMoney(total)}</span>
+                {/* Always dark, so the total stands out against either theme */}
+                <div className="flex items-center justify-between rounded-2xl bg-slate-900 p-5 shadow-lg">
+                  <span className="text-sm font-semibold tracking-wide text-slate-300">TOTAL DUE</span>
+                  <span className="font-mono text-2xl font-bold tracking-tight text-violet-400">{formatMoney(total)}</span>
                 </div>
               </div>
             </div>
 
             <div className="card">
-              <div className="card-bar bg-linear-to-b from-purple-500 to-pink-500" />
-              <h3 className="card-title mb-3!">
-                <CreditCard className="h-4 w-4 text-purple-500" /> Payment Type
+              <div className="card-topbar" />
+              <h3 className="mb-5 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-slate-800 dark:text-slate-200">
+                <CreditCard className="h-4 w-4 text-violet-600" /> Payment Type
               </h3>
 
-              <div className="seg mb-4">
-                {METHODS.map(({ name, Icon }) => (
-                  <button key={name} type="button" className="seg-btn" aria-pressed={payment === name} onClick={() => setPayment(name)}>
-                    <Icon className="h-3.5 w-3.5" /> {name}
-                  </button>
-                ))}
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {METHODS.map(({ name, Icon }) => {
+                  const active = payment === name
+                  return (
+                    <button
+                      key={name} type="button" onClick={() => setPayment(name)}
+                      className={
+                        'flex items-center justify-center gap-2 rounded-xl border-2 px-4 py-3.5 text-sm font-medium transition-all ' +
+                        (active
+                          ? 'border-violet-600 bg-violet-600 text-white shadow-sm'
+                          : 'border-slate-200 text-slate-600 hover:border-slate-300 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-600')
+                      }
+                    >
+                      <Icon className="h-4 w-4" /> {name}
+                    </button>
+                  )
+                })}
               </div>
 
               {payment === 'Cash' && (
-                <div className="space-y-2">
+                <div className="mt-5 space-y-2">
                   <label className="label" htmlFor="received">Cash tendered (₦), optional. Calculates change.</label>
                   <div className="relative">
-                    <span className="absolute left-3.5 top-3 font-bold text-slate-400">₦</span>
+                    <span className="absolute left-3.5 top-3 font-medium text-slate-400">₦</span>
                     <input
                       id="received" type="number" inputMode="decimal" min="0" step="any"
                       className="input pl-8 font-mono" placeholder="Amount given by customer..."
@@ -239,20 +256,30 @@ export default function NewSale() {
                   )}
                 </div>
               )}
+
+              <div className="mt-6 flex flex-col gap-3 border-t border-slate-100 pt-5 dark:border-slate-800 sm:flex-row sm:justify-end">
+                <button type="button" className="btn-secondary" onClick={clearSale} disabled={items.length === 0}>
+                  Clear Sale
+                </button>
+                <button
+                  type="button"
+                  onClick={completeSale}
+                  disabled={items.length === 0}
+                  className="btn bg-emerald-600 text-white shadow-md shadow-emerald-600/25 hover:bg-emerald-500"
+                >
+                  <CheckCircle className="h-4 w-4" /> Complete Sale &amp; Print
+                </button>
+              </div>
             </div>
           </fieldset>
 
-          {saved ? (
+          {saved && (
             <div className="flex flex-wrap gap-3">
               <button type="button" className="btn-secondary" onClick={() => window.print()}>
                 <Printer className="h-4 w-4" /> Print again
               </button>
               <button type="button" className="btn-primary" onClick={startNewSale}>Start new sale</button>
             </div>
-          ) : (
-            <button type="button" className="btn-primary btn-big" disabled={items.length === 0} onClick={completeSale}>
-              <Printer className="h-5 w-5" /> Complete Sale &amp; Print Receipt
-            </button>
           )}
         </div>
 

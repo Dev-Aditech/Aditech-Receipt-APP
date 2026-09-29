@@ -76,7 +76,7 @@ export default function Settings() {
       <form className="card space-y-5 lg:col-span-7 lg:p-8 print:hidden" onSubmit={handleSave}>
         <div>
           <h2 className="flex items-center gap-2 text-base font-bold text-slate-900 dark:text-white">
-            <SettingsIcon className="h-5 w-5 text-indigo-500" /> Store &amp; Terminal Settings
+            <SettingsIcon className="h-5 w-5 text-violet-600" /> Store &amp; Terminal Settings
           </h2>
           <p className="muted text-xs">Manage the store details printed on receipts</p>
         </div>
@@ -88,7 +88,7 @@ export default function Settings() {
           )}
           <input
             id="logo" type="file" accept="image/*" onChange={handleLogo}
-            className="block w-full text-xs text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-indigo-600 file:px-4 file:py-2.5 file:text-xs file:font-bold file:text-white hover:file:bg-indigo-500 dark:text-slate-400"
+            className="block w-full text-xs text-slate-500 file:mr-3 file:rounded-xl file:border-0 file:bg-violet-600 file:px-4 file:py-2.5 file:text-xs file:font-bold file:text-white hover:file:bg-violet-500 dark:text-slate-400"
           />
           {form.logo && (
             <button type="button" className="link mt-2" onClick={() => update('logo', '')}>Remove logo</button>

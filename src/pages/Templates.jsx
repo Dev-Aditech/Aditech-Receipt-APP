@@ -33,7 +33,7 @@ export default function Templates() {
     <div className="space-y-6">
       <div>
         <h2 className="flex items-center gap-2 text-base font-bold text-slate-900 dark:text-white">
-          <Palette className="h-5 w-5 text-indigo-500" /> Receipt Templates
+          <Palette className="h-5 w-5 text-violet-600" /> Receipt Templates
         </h2>
         <p className="muted text-xs">Pick how your printed receipts look. Your logo and details show on every template.</p>
       </div>
@@ -49,13 +49,13 @@ export default function Templates() {
               key={id}
               className={
                 'card !p-4 transition-all ' +
-                (isSelected ? 'ring-2 ring-indigo-500 ring-offset-2 ring-offset-slate-50 dark:ring-offset-slate-950' : '')
+                (isSelected ? 'ring-2 ring-violet-500 ring-offset-2 ring-offset-slate-50 dark:ring-offset-slate-950' : '')
               }
             >
               <div className="mb-1 flex items-start justify-between gap-2">
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white">{name}</h3>
                 {isSelected && (
-                  <span className="flex shrink-0 items-center gap-1 rounded-full bg-indigo-600 px-2 py-0.5 text-[10px] font-bold text-white">
+                  <span className="flex shrink-0 items-center gap-1 rounded-full bg-violet-600 px-2 py-0.5 text-[10px] font-bold text-white">
                     <Check className="h-3 w-3" /> Selected
                   </span>
                 )}
